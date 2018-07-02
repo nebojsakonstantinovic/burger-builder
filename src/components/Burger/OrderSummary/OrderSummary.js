@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import Hack from '../../../hoc/Hack';
+import Hack from '../../../hoc/Hack/Hack';
 import Button from '../../UI/Button/Button';
 
 class OrderSummary extends Component {
