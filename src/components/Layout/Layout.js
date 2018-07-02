@@ -1,24 +1,42 @@
-import React from 'react';
+import React, { Component } from 'react';
 
 import Hack from '../../hoc/Hack';
 import classes from './Layout.css';
 import Toolbar from '../Navigation/Toolbar/Toolbar';
 import SideDrawer from '../Navigation/SideDrawer/SideDrawer';
 
-const layout = (props) => {
-  return (
-    <Hack>
-      <Toolbar />
-      <SideDrawer />
-      <div>
-        Toolbar, SideDrawer, BackDrop
-      </div>
-      <main className={classes.Content}>
-        {props.children}
-      </main>
-    </Hack>
-  )
+class Layout extends Component {
+  state = {
+    showSideDrower: false,
+  }
+
+  sideDrawerClosedHandler = () => {
+    this.setState({showSideDrower: false});
+  }
+
+  sideDrawerToggleHandler = () => {
+    this.setState((prevState) => {
+      return {showSideDrower: !prevState.showSideDrower}
+    }); 
+  }
+
+  drowerToggleClicked
+
+  render () {
+    return (
+      <Hack>
+        <Toolbar drowerToggleClicked={this.sideDrawerToggleHandler}/>
+        <SideDrawer closed={this.sideDrawerClosedHandler} open={this.state.showSideDrower}/>
+        <div>
+          Toolbar, SideDrawer, BackDrop
+        </div>
+        <main className={classes.Content}>
+          {this.props.children}
+        </main>
+      </Hack>
+    )
+  }
 }
 
 
-export default layout;
+export default Layout;
